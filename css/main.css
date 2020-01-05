@@ -218,13 +218,6 @@ h6 {
   line-height: 1.5;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 20px 0 15px;
-}
 h1 {
   font-size: 22px;
 }
@@ -1825,7 +1818,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #6b25ab;
+  background: #47ff67;
 }
 .links-of-blogroll {
   font-size: 13px;
