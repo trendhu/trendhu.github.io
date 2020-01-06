@@ -1105,12 +1105,12 @@ pre .javascript .function {
   position: relative;
   display: inline-block;
   padding: 0 40px;
-  color: #555;
+  color: #808080;
   background: transparent;
   border-bottom: none;
 }
 .brand:hover {
-  color: #ff8c00;
+  color: #ffa500;
 }
 .logo {
   display: inline-block;
@@ -1818,7 +1818,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #46f2c6;
+  background: #c1ff2f;
 }
 .links-of-blogroll {
   font-size: 13px;
