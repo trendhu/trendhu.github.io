@@ -420,7 +420,52 @@
             <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>获取容器的日志</p>
 <h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs [OPTIONS] CONTAINER</span><br></pre></td></tr></table></figure>
 
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><p>| 名字| 简写    | 默认| 描述|<br>| ————- |:————-:| —–:|<br>| <code>--details</code> |   |  | 显示提供给日志的额外细节 |<br>| <code>--follow</code> |  <code>-f</code> |  | 按照日志输出 <code>(查看实时日志)</code> |<br>| <code>--since</code> |  |  | 自时间戳（例如2013-01-02T13：23：37）<br>或相对（例如42分钟42分钟）开始显示日志 <br><code>（日志显示起始时间）</code> |<br>| <code>--tail</code> |  | <code>--all</code> | 从日志末尾显示的行数 |<br>| <code>--timestamps</code> | <code>-t</code> |  | 显示时间戳 |<br>| <code>--until</code> |  |  | 在时间戳（例如2013-01-02T13：23：37）<br>或相对（例如42分钟42分钟）之前显示日志<br><code>（日志显示结束时间）</code> |</p>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><table>
+<thead>
+<tr>
+<th>名字</th>
+<th>简写</th>
+<th>默认</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--details</code></td>
+<td></td>
+<td></td>
+<td>显示提供给日志的额外细节</td>
+</tr>
+<tr>
+<td><code>--follow</code></td>
+<td><code>-f</code></td>
+<td></td>
+<td>按照日志输出 <code>(查看实时日志)</code></td>
+</tr>
+<tr>
+<td><code>--since</code></td>
+<td></td>
+<td></td>
+<td>自时间戳（例如2013-01-02T13：23：37）<br>或相对（例如42分钟42分钟）开始显示日志 <br><code>（日志显示起始时间）</code></td>
+</tr>
+<tr>
+<td><code>--tail</code></td>
+<td></td>
+<td><code>--all</code></td>
+<td>从日志末尾显示的行数</td>
+</tr>
+<tr>
+<td><code>--timestamps</code></td>
+<td><code>-t</code></td>
+<td></td>
+<td>显示时间戳</td>
+</tr>
+<tr>
+<td><code>--until</code></td>
+<td></td>
+<td></td>
+<td>在时间戳（例如2013-01-02T13：23：37）<br>或相对（例如42分钟42分钟）之前显示日志<br><code>（日志显示结束时间）</code></td>
+</tr>
+</tbody></table>
 <h2 id="扩展描述"><a href="#扩展描述" class="headerlink" title="扩展描述"></a>扩展描述</h2><ol>
 <li>传递一个负数或一个非整数<code>--tail</code>是无效的，在这种情况下值被设置为默认值 <code>all</code>。</li>
 <li>该<code>docker logs --details</code>命令将添加额外的属性，例如<code>--log-op</code>t创建容器时提供的环境变量和标签。</li>
