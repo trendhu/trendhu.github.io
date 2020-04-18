@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="工具 协议," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、QPS (每秒查询):Queries Per Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。 2、TPS (每秒事务):是TransactionsPerSecond的缩写，也就是事务数&#x2F;秒。它是软件测试结果的测量单位。一个事务是指一个客户机向服务器发送请求然后服务器做出反应的过程。客户机在发送请求时开始计时，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网站统计名词解释">
+<meta property="og:url" content="http://yoursite.com/2020/04/17/007/index.html">
+<meta property="og:site_name" content="乐游さん 的博客~">
+<meta property="og:description" content="1、QPS (每秒查询):Queries Per Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。 2、TPS (每秒事务):是TransactionsPerSecond的缩写，也就是事务数&#x2F;秒。它是软件测试结果的测量单位。一个事务是指一个客户机向服务器发送请求然后服务器做出反应的过程。客户机在发送请求时开始计时，">
+<meta property="article:published_time" content="2020-04-17T15:30:00.000Z">
+<meta property="article:modified_time" content="2020-04-17T15:30:00.000Z">
+<meta property="article:author" content="乐游">
+<meta property="article:tag" content="工具 协议">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/04/17/007/"/>
+
+
+
+
+
+  <title>网站统计名词解释 | 乐游さん 的博客~</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">乐游さん 的博客~</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">一直来自北方的程序猿 ~ </h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/17/007/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乐游">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/WechatIMG4892.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乐游さん 的博客~">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">网站统计名词解释</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-17T23:30:00+08:00">
+                2020-04-17
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-17T23:30:00+08:00">
+                2020-04-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/04/17/007/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/04/17/007/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1、QPS-每秒查询"><a href="#1、QPS-每秒查询" class="headerlink" title="1、QPS (每秒查询):"></a>1、QPS (每秒查询):</h3><p>Queries Per Second意思是“每秒查询率”，是一台服务器每秒能够相应的查询次数，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。</p>
+<h3 id="2、TPS-每秒事务"><a href="#2、TPS-每秒事务" class="headerlink" title="2、TPS (每秒事务):"></a>2、TPS (每秒事务):</h3><p>是TransactionsPerSecond的缩写，也就是事务数/秒。它是软件测试结果的测量单位。一个事务是指一个客户机向服务器发送请求然后服务器做出反应的过程。客户机在发送请求时开始计时，收到服务器响应后结束计时，以此来计算使用的时间和完成的事务个数。</p>
+<p>QPS vs TPS：QPS基本类似于TPS，但是不同的是，对于一个页面的一次访问，形成一个TPS；但一次页面请求，可能产生多次对服务器的请求，服务器对这些请求，就可计入“QPS”之中。如，访问一个页面会请求服务器2次，一次访问，产生一个“T”，产生2个“Q”。</p>
+<h3 id="3、RT-响应时间"><a href="#3、RT-响应时间" class="headerlink" title="3、RT (响应时间):"></a>3、RT (响应时间):</h3><p>响应时间：执行一个请求从开始到最后收到响应数据所花费的总体时间,即从客户端发起请求到收到服务器响应结果的时间。</p>
+<p>响应时间RT(Response-time)，是一个系统最重要的指标之一，它的数值大小直接反应了系统的快慢。</p>
+<h3 id="4、并发数"><a href="#4、并发数" class="headerlink" title="4、并发数:"></a>4、并发数:</h3><p>并发数是指系统同时能处理的请求数量，这个也是反应了系统的负载能力。</p>
+<h3 id="5、吞吐量"><a href="#5、吞吐量" class="headerlink" title="5、吞吐量:"></a>5、吞吐量:</h3><p>系统的吞吐量（承压能力）与request对CPU的消耗、外部接口、IO等等紧密关联。单个request 对CPU消耗越高，外部系统接口、IO速度越慢，系统吞吐能力越低，反之越高。</p>
+<p>系统吞吐量几个重要参数：QPS（TPS）、并发数、响应时间。</p>
+<p>QPS（TPS）：（Query Per Second）每秒钟request/事务 数量<br>并发数： 系统同时处理的request/事务数<br>响应时间： 一般取平均响应时间<br>理解了上面三个要素的意义之后，就能推算出它们之间的关系：</p>
+<p>QPS（TPS）= 并发数/平均响应时间<br>并发数 = QPS*平均响应时间</p>
+<blockquote>
+<h3 id="实际举例："><a href="#实际举例：" class="headerlink" title="实际举例："></a>实际举例：</h3><p>我们通过一个实例来把上面几个概念串起来理解。按二八定律来看，如果每天 80% 的访问集中在 20% 的时间里，这 20% 时间就叫做峰值时间。</p>
+<p>公式：( 总PV数 * 80% ) / ( 每天秒数 * 20% ) = 峰值时间每秒请求数(QPS)<br>机器：峰值时间每秒QPS / 单台机器的QPS = 需要的机器</p>
+<ul>
+<li><p>1、每天300w PV 的在单台机器上，这台机器需要多少QPS？<br>( 3000000 * 0.8 ) / (86400 * 0.2 ) = 139 (QPS)</p>
+</li>
+<li><p>2、如果一台机器的QPS是58，需要几台机器来支持？<br>139 / 58 = 3</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="6、最佳线程数、QPS、RT"><a href="#6、最佳线程数、QPS、RT" class="headerlink" title="6、最佳线程数、QPS、RT:"></a>6、最佳线程数、QPS、RT:</h3><ul>
+<li><p>1、单线程QPS公式：QPS=1000ms/RT<br>对同一个系统而言，支持的线程数越多，QPS越高。假设一个RT是80ms,则可以很容易的计算出QPS,QPS = 1000/80 = 12.5<br>多线程场景，如果把服务端的线程数提升到2，那么整个系统的QPS则为 2*（1000/80） = 25, 可见QPS随着线程的增加而线性增长，那QPS上不去就加线程呗，听起来很有道理，公司也说的通，但是往往现实并非如此。</p>
+</li>
+<li><p>2、最佳线程数量<br>刚好消耗完服务器的瓶颈资源的临界线程数，公式如下<br>最佳线程数量=（（线程等待时间+线程cpu时间）/线程cpu时间）* cpu数量</p>
+<p>特性：</p>
+<ul>
+<li>在达到最佳线程数的时候，线程数量继续递增，则QPS不变，而响应时间变长，持续递增线程数量，则QPS开始下降。</li>
+<li>每个系统都有其最佳线程数量，但是不同状态下，最佳线程数量是会变化的。</li>
+<li>瓶颈资源可以是CPU,可以是内存，可以是锁资源，IO资源：超过最佳线程数-导致资源的竞争，超过最佳线程数-响应时间递增。</li>
+</ul>
+</li>
+</ul>
+<h3 id="7、PV-访问量"><a href="#7、PV-访问量" class="headerlink" title="7、PV (访问量):"></a>7、PV (访问量):</h3><p>PV（Page View）访问量, 即页面浏览量或点击量，衡量网站用户访问的网页数量；在一定统计周期内用户每打开或刷新一个页面就记录1次，多次打开或刷新同一页面则浏览量累计。</p>
+<h3 id="8、UV-独立访客"><a href="#8、UV-独立访客" class="headerlink" title="8、UV (独立访客):"></a>8、UV (独立访客):</h3><p>UV（Unique Visitor）独立访客，统计1天内访问某站点的用户数(以cookie为依据);访问网站的一台电脑客户端为一个访客。可以理解成访问某网站的电脑的数量。网站判断来访电脑的身份是通过来访电脑的cookies实现的7a686964616fe78988e69d8331333365656530。如果更换了IP后但不清除cookies，再访问相同网站，该网站的统计中UV数是不变的。如果用户不保存cookies访问、清除了cookies或者更换设备访问，计数会加1。00:00-24:00内相同的客户端多次访问只计为1个访客。</p>
+<h3 id="9、VV-访客的访问次数"><a href="#9、VV-访客的访问次数" class="headerlink" title="9、VV (访客的访问次数):"></a>9、VV (访客的访问次数):</h3><p>VV (Visit View) 访客的访问次数，用以记录所有访客1天内访问了您的网站多少次。当访客完成所有的浏览并最终关掉该网站的所有页面时便完成了一次访问，同一访客1天内可能有多次访问行为，访问次数累计。</p>
+<h3 id="10、IP-IV-独立IP数"><a href="#10、IP-IV-独立IP数" class="headerlink" title="10、IP/IV (独立IP数):"></a>10、IP/IV (独立IP数):</h3><p>IP（Internet Protocol）访问量指独立IP访问数，计算是以一个独立的IP在一个计算时段内访问网站计算为1次IP访问数。在同一个计算时段内不管这个IP访问多少次均计算为1次。计算时段有以1天为一个计算时段，也有以1个小时为一个计算时段。</p>
+<blockquote>
+<h2 id="扩展："><a href="#扩展：" class="headerlink" title="扩展："></a>扩展：</h2><p>一般情况下，统计UV数应该大于等于IP数，但有些情况下，有可能UV数会小于IP数：</p>
+<p>1) IP地址是绝对的，从TCP链路上取的，真实的，不唯一的；<br>2) UV设置的cookies，随机设置的，可重复的，只是重复概率足够小；<br>3) 移动笔记本不时的更换IP，可以导致这种问题；<br>4) 客户端禁用cookie或者客户端安全级别高会导致cookie设置不上，会出现这种问题；<br>5) 如果采用的图片统计，由于拿不到cookie会出现这种问题；</p>
+</blockquote>
+<h3 id="11、PR-网页级别技术"><a href="#11、PR-网页级别技术" class="headerlink" title="11、PR (网页级别技术):"></a>11、PR (网页级别技术):</h3><p>PR（Page Rank）网页级别技术。取自Google的创始人Larry Page，它是Google排名运算法则(排名公式)的一部分，用来标识网页的等级/重要性。级别从1到10级，10级为满分。PR值越高说明该网页越受欢迎(越重要)</p>
+<h3 id="12、其他"><a href="#12、其他" class="headerlink" title="12、其他"></a>12、其他</h3><p>雅虎统计指数（YSR）：通过来源带来的PV、UV、IP，以及用户停留时间、访问情况、用户行为等因素综合分析按不同权重计算得到的，评判来源质量的指数，指数越高，表明来源质量越高。</p>
+<p>新访客：某客户端首次访问为一个新访客。</p>
+<p>最近访客：最近一段时间内访问您网站的客户端。目前显示50条。</p>
+<p>当前在线人数：15分钟内在线访问的UV数。</p>
+<p>24小时独立IP：指每小时独立的IP地址。因为该数据每个小时是独立的，所以叫24小时独立的IP。</p>
+<blockquote>
+<p>例如192.168.1.1 0点-1点 访问了您网站 在这个时段算一个IP。<br>如果192.168.1.1 0点-1点 再次访问您的网站 去重不计算IP。<br>如果192.168.1.1 1点-2点 又访问您的网站 在这个时段也算一个IP。</p>
+</blockquote>
+<p>最高IP：: 指选择时间段范围内，某日访问IP最多的数值。</p>
+<p>最高PV：指选择时间段范围内，某日访问量最高的数值。</p>
+<p>日均流量：指选择时间范围内，平均每日流量。（日均流量=总访问量/总天数）</p>
+<p>人均访问量：指选择时间范围内，每个访客访问网站的PV数。（计算公式：人均访问量=访问量/唯一访客数）。</p>
+<p>访问过程：每个访问者从进入您的网站开始访问，一直到最后离开您的网站，整个过程中发生的一切点击访问行为，称为一次访问过程。</p>
+<p>访问入口：每次访问过程中，用户进入的第一个页面是访问入口页面。</p>
+<p>访问出口：每次访问过程中，用户结束访问，离开前点击的最后一个页面为访问出口页面。</p>
+<p>平均停留时间：所有访客的访问过程，访问持续时间的平均值。</p>
+<p>平均访问页数：所有访客的访问过程，连续访问页面数的平均值。</p>
+<p>贡献用户数：每个访问来源带来的独立访客数，即UV数。</p>
+<p>贡献IP数：每个访问来源带来的独立IP数。</p>
+<p>贡献PV数：每个访问来源带来的访客的一切后续访问行为所产生的PV数。</p>
+<p>日均 IP / PV 访问量约为 600 / 2400：今天访问首页次数为2400次，访问IP为600个，也就是说这600个IP一共访问首页2400次。</p>
+<hr>
+<h2 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h2><ul>
+<li><a href="https://www.cnblogs.com/Tanwheey/p/9590401.html" target="_blank" rel="noopener">怎么区分PV、IV、UV以及网站统计名词解释（pv、曝光、点击）</a></li>
+<li><a href="https://blog.csdn.net/xqtesting/article/details/103260565" target="_blank" rel="noopener">文搞懂高并发性能指标：QPS、TPS、RT、吞吐量</a></li>
+<li><a href="http://www.ha97.com/5095.html" target="_blank" rel="noopener">系统吞吐量（TPS）、用户并发量、性能测试概念和公式</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%B7%A5%E5%85%B7-%E5%8D%8F%E8%AE%AE/" rel="tag"># 工具 协议</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/16/006/" rel="next" title="CC BY-SA 3.0协议文本">
+                <i class="fa fa-chevron-left"></i> CC BY-SA 3.0协议文本
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/18/008/" rel="prev" title="Google PR算法">
+                Google PR算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------ 本文结束------</div>
+    
+</div>
+    
+  </div>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/WechatIMG4892.jpeg"
+                alt="乐游" />
+            
+              <p class="site-author-name" itemprop="name">乐游</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、QPS-每秒查询"><span class="nav-number">1.</span> <span class="nav-text">1、QPS (每秒查询):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、TPS-每秒事务"><span class="nav-number">2.</span> <span class="nav-text">2、TPS (每秒事务):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、RT-响应时间"><span class="nav-number">3.</span> <span class="nav-text">3、RT (响应时间):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、并发数"><span class="nav-number">4.</span> <span class="nav-text">4、并发数:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、吞吐量"><span class="nav-number">5.</span> <span class="nav-text">5、吞吐量:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际举例："><span class="nav-number">6.</span> <span class="nav-text">实际举例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、最佳线程数、QPS、RT"><span class="nav-number">7.</span> <span class="nav-text">6、最佳线程数、QPS、RT:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、PV-访问量"><span class="nav-number">8.</span> <span class="nav-text">7、PV (访问量):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、UV-独立访客"><span class="nav-number">9.</span> <span class="nav-text">8、UV (独立访客):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、VV-访客的访问次数"><span class="nav-number">10.</span> <span class="nav-text">9、VV (访客的访问次数):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10、IP-IV-独立IP数"><span class="nav-number">11.</span> <span class="nav-text">10、IP&#x2F;IV (独立IP数):</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展："><span class="nav-number"></span> <span class="nav-text">扩展：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#11、PR-网页级别技术"><span class="nav-number">1.</span> <span class="nav-text">11、PR (网页级别技术):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12、其他"><span class="nav-number">2.</span> <span class="nav-text">12、其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献："><span class="nav-number"></span> <span class="nav-text">参考文献：</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">乐游</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'ry4r48Li8ylactoROUmqjh7M-gzGzoHsz',
+        appKey: 'vBcOR0V5lfk22hVzx04wUI57',
+        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧！',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
