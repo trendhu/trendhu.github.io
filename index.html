@@ -266,7 +266,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="乐游">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/WechatIMG4892.jpeg">
+      <meta itemprop="image" content="/images/WechatIMG22.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -440,12 +440,203 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/009/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乐游">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/WechatIMG22.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乐游さん 的博客~">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/18/009/" itemprop="url">Java多线程原子操作CAS</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-18T01:13:00+08:00">
+                2020-04-18
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-18T01:13:00+08:00">
+                2020-04-18
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/04/18/009/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/009/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一，什么是原子操作？如何实现原子操作</p>
+<p>1，synchronized可以完成原子操作，他是给予阻塞的锁的机制,但是有问题：</p>
+<p>　　如果被阻塞的线程优先级很高怎么办？<br>　　拿到锁的线程一直不释放锁怎么办？<br>　　有大量线程进行竞争，消耗cpu。还容易出现死锁<br>　　锁的粒度比较大,影响性能。</p>
+<p>二，CAS的原理(Compare And Swap:比较交换)</p>
+<p>1，从指令级别保证这是一个原子操作。</p>
+<p>每个CAS都包含三个运算符：<br>　　一个内存地址V<br>　　一个期望的值A<br>　　一个新值B</p>
+<p>基本思路：<br>　　如果在内存地址V上进行操作,如果说这个地址上存放的值就是我期望的值A。就给地址V赋给新值B.<br>　　如果内存地址上不是我期待的A值,那就什么都不做。<br>　　在循环(这里用的是死循环，不带条件的一直在那里循环。又叫：自旋)里不断的进行CAS操作</p>
+<p>利用了现代操作系统都支持CAS的指令，循环这个指令，直到成功为止。<br>其实是不再语言层面进行处理，而是把它交给了cpu和内存去实现，利用cpu的多处理能力，在硬件层面实现多线程安全。</p>
+<p>三，CAS的问题</p>
+<p>1，ABA问题</p>
+<p>问题描述：<br>　　第一个线程拿到内存地址上的值。此时第二个线程也拿到内存地址上的值，然后修改成B,然后又改回去。<br>　　在第二个线程完成前面一顿操作之后,第一个线程才开始比较内存地址上的是否和A相等。那么比较的结果<br>　　肯定是相同的啦。第二个线程，修改过值，又修改回去。但是对于第二个线程的那些操作,第一个线程却不知道,这是有风险的。</p>
+<p>怎么解决：引入版本号，每次变化，版本号都变化。这样每次数据变化都可以感知到</p>
+<p>2，开销问题</p>
+<p>　　在死循环里不断的进行操作，如果这个操作长期不成功,浪费cpu资源</p>
+<p>3，只能保证一个共享变量的原子操作</p>
+<p>　　一个内存地址只能指向一个变量，当有多个共享变量时，就无法保证操作的原子性。<br>　　那么如果有多个共享变量呢？我们可以把多个共享变量变成一个共享变量，比如把多个变量封装到一个类中。</p>
+<p>四，JDK中相关原子操作类的使用</p>
+<p>1，更新基本类型：</p>
+<p>　　AtomicBoolean,AtomicInteger,AtomicLong</p>
+<p>2，更新数组类：</p>
+<p>　　AtomicInterArray,AtomicLongArray,AtomicReferenceArray</p>
+<p>3，更新引用类型：</p>
+<p>　　AtomicReference,AtomicMarkableReference,AtomicStampedReference</p>
+<p>4，原子更新字段类：</p>
+<p>　　AtomicReferenceFieldUpdater,AtomicIntegerFieldUpdater,AtomicLongFieldUpdater</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  <div>
+    
+  </div>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/17/007/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="乐游">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/WechatIMG4892.jpeg">
+      <meta itemprop="image" content="/images/WechatIMG22.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -679,7 +870,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="乐游">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/WechatIMG4892.jpeg">
+      <meta itemprop="image" content="/images/WechatIMG22.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -866,7 +1057,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="乐游">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/WechatIMG4892.jpeg">
+      <meta itemprop="image" content="/images/WechatIMG22.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1215,7 +1406,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="乐游">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/WechatIMG4892.jpeg">
+      <meta itemprop="image" content="/images/WechatIMG22.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1396,7 +1587,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="乐游">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/WechatIMG4892.jpeg">
+      <meta itemprop="image" content="/images/WechatIMG22.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1584,7 +1775,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="乐游">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/WechatIMG4892.jpeg">
+      <meta itemprop="image" content="/images/WechatIMG22.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1810,7 +2001,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="乐游">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/WechatIMG4892.jpeg">
+      <meta itemprop="image" content="/images/WechatIMG22.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1995,7 +2186,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/images/WechatIMG4892.jpeg"
+                src="/images/WechatIMG22.jpeg"
                 alt="乐游" />
             
               <p class="site-author-name" itemprop="name">乐游</p>
@@ -2009,7 +2200,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2020,7 +2211,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2031,7 +2222,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
