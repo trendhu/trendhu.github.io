@@ -90,12 +90,12 @@
 
 
 
-<meta name="description" content="一，什么是原子操作？如何实现原子操作 1，synchronized可以完成原子操作，他是给予阻塞的锁的机制,但是有问题： 　　如果被阻塞的线程优先级很高怎么办？　　拿到锁的线程一直不释放锁怎么办？　　有大量线程进行竞争，消耗cpu。还容易出现死锁　　锁的粒度比较大,影响性能。 二，CAS的原理(Compare And Swap:比较交换) 1，从指令级别保证这是一个原子操作。 每个CAS都包含三个">
+<meta name="description" content="一，什么是原子操作？如何实现原子操作 1，synchronized可以完成原子操作，他是给予阻塞的锁的机制,但是有问题： 　　如果被阻塞的线程优先级很高怎么办？　　拿到锁的线程一直不释放锁怎么办？　　有大量线程进行竞争，消耗cpu。还容易出现死锁　　锁的粒度比较大,影响性能。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java多线程原子操作CAS">
 <meta property="og:url" content="http://yoursite.com/2020/04/18/009/index.html">
 <meta property="og:site_name" content="乐游さん 的博客~">
-<meta property="og:description" content="一，什么是原子操作？如何实现原子操作 1，synchronized可以完成原子操作，他是给予阻塞的锁的机制,但是有问题： 　　如果被阻塞的线程优先级很高怎么办？　　拿到锁的线程一直不释放锁怎么办？　　有大量线程进行竞争，消耗cpu。还容易出现死锁　　锁的粒度比较大,影响性能。 二，CAS的原理(Compare And Swap:比较交换) 1，从指令级别保证这是一个原子操作。 每个CAS都包含三个">
+<meta property="og:description" content="一，什么是原子操作？如何实现原子操作 1，synchronized可以完成原子操作，他是给予阻塞的锁的机制,但是有问题： 　　如果被阻塞的线程优先级很高怎么办？　　拿到锁的线程一直不释放锁怎么办？　　有大量线程进行竞争，消耗cpu。还容易出现死锁　　锁的粒度比较大,影响性能。">
 <meta property="article:published_time" content="2020-04-17T17:13:00.000Z">
 <meta property="article:modified_time" content="2020-04-17T17:13:00.000Z">
 <meta property="article:author" content="乐游">
@@ -382,6 +382,8 @@
         <p>一，什么是原子操作？如何实现原子操作</p>
 <p>1，synchronized可以完成原子操作，他是给予阻塞的锁的机制,但是有问题：</p>
 <p>　　如果被阻塞的线程优先级很高怎么办？<br>　　拿到锁的线程一直不释放锁怎么办？<br>　　有大量线程进行竞争，消耗cpu。还容易出现死锁<br>　　锁的粒度比较大,影响性能。</p>
+<a id="more"></a>
+
 <p>二，CAS的原理(Compare And Swap:比较交换)</p>
 <p>1，从指令级别保证这是一个原子操作。</p>
 <p>每个CAS都包含三个运算符：<br>　　一个内存地址V<br>　　一个期望的值A<br>　　一个新值B</p>

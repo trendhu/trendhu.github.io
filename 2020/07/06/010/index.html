@@ -384,8 +384,11 @@
 <ul>
 <li>(k1, k2) -&gt; k1，取第一个值</li>
 <li>(k1, k2) -&gt; k2)，取第二个值</li>
-<li>(k1, k2) -&gt; k1 + k2)，对两个值做某些操作后取结果。（例如基本类型可以进行加减乘除）。<br>例：</li>
+<li>(k1, k2) -&gt; k1 + k2)，对两个值做某些操作后取结果。（例如基本类型可以进行加减乘除）。</li>
 </ul>
+<a id="more"></a>
+
+<p>例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, int&gt; priceMap &#x3D; pmOrders.stream().collect(Collectors.toMap(PmOrder::getOrderNo, PmOrder::getPrice,(v1,v2)-&gt;v1));</span><br></pre></td></tr></table></figure>
 
 <p>Stream Collectors.toMap NullPointerException 异常</p>
