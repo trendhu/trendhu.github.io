@@ -79,7 +79,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="JAVA bean spring 对象拷贝," />
 
 
 
@@ -90,13 +90,16 @@
 
 
 
-<meta name="description" content="神秘领域">
-<meta property="og:type" content="website">
-<meta property="og:title" content="乐游さん 的博客~">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta name="description" content="在项目中，尤其是在服务层，经常要将服务中的Dto实体对象拷贝到Entity对象用于前端展示。反过来也是一样，需要将前端请求对象转换为服务端的数据对象。现在市面上有很多这样的工具包，比如spring框架中就自带了BeanUtils，使我们进行这样的数据操作十分简单快捷。但是一直以来却没有关注到对象属性的拷贝性能问题，最近在想：单个对象的拷贝是快速的，可以不在意太多性能问题，可是如果数量级变大了会怎样">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache的BeanUtils、Spring的BeanUtils、Mapstruct、BeanCopier对象拷贝">
+<meta property="og:url" content="http://yoursite.com/2020/07/06/012/index.html">
 <meta property="og:site_name" content="乐游さん 的博客~">
-<meta property="og:description" content="神秘领域">
+<meta property="og:description" content="在项目中，尤其是在服务层，经常要将服务中的Dto实体对象拷贝到Entity对象用于前端展示。反过来也是一样，需要将前端请求对象转换为服务端的数据对象。现在市面上有很多这样的工具包，比如spring框架中就自带了BeanUtils，使我们进行这样的数据操作十分简单快捷。但是一直以来却没有关注到对象属性的拷贝性能问题，最近在想：单个对象的拷贝是快速的，可以不在意太多性能问题，可是如果数量级变大了会怎样">
+<meta property="article:published_time" content="2020-07-06T12:10:00.000Z">
+<meta property="article:modified_time" content="2020-07-06T12:10:00.000Z">
 <meta property="article:author" content="乐游">
+<meta property="article:tag" content="JAVA bean spring 对象拷贝">
 <meta name="twitter:card" content="summary">
 
 
@@ -127,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/2/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/07/06/012/"/>
 
 
 
 
 
-  <title>乐游さん 的博客~</title>
+  <title>Apache的BeanUtils、Spring的BeanUtils、Mapstruct、BeanCopier对象拷贝 | 乐游さん 的博客~</title>
   
 
 
@@ -152,8 +155,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -246,9 +248,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -261,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/05/002/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/06/012/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="乐游">
@@ -278,9 +280,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/05/002/" itemprop="url">docker logs 说明</a></h2>
+          <h2 class="post-title" itemprop="name headline">Apache的BeanUtils、Spring的BeanUtils、Mapstruct、BeanCopier对象拷贝</h2>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-05T13:10:37+08:00">
-                2020-01-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-06T20:10:00+08:00">
+                2020-07-06
               </time>
             
 
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-05T16:10:20+08:00">
-                2020-01-05
+              <time title="更新于" itemprop="dateModified" datetime="2020-07-06T20:10:00+08:00">
+                2020-07-06
               </time>
             
           </span>
@@ -327,8 +327,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index">
-                    <span itemprop="name">运维</span>
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
                   </a>
                 </span>
 
@@ -345,8 +345,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/01/05/002/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/01/05/002/" itemprop="commentCount"></span>
+                <a href="/2020/07/06/012/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/07/06/012/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -355,6 +355,11 @@
           
           
 
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
           
 
           
@@ -374,64 +379,93 @@
       
 
       
-        
-          <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>获取容器的日志</p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs [OPTIONS] CONTAINER</span><br></pre></td></tr></table></figure>
+        <p>在项目中，尤其是在服务层，经常要将服务中的Dto实体对象拷贝到Entity对象用于前端展示。反过来也是一样，需要将前端请求对象转换为服务端的数据对象。现在市面上有很多这样的工具包，比如spring框架中就自带了BeanUtils，使我们进行这样的数据操作十分简单快捷。但是一直以来却没有关注到对象属性的拷贝性能问题，最近在想：单个对象的拷贝是快速的，可以不在意太多性能问题，可是如果数量级变大了会怎样呢？如果数量级到达了百万级别，会出现什么样的情况呢？</p>
+<a id="more"></a>
 
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><table>
+<p>带着心中的疑问，我首先梳理出来现在有哪些对象拷贝的方式：</p>
+<ol>
+<li>Apache的BeanUtils：BeanUtils是Apache commens组件里面的成员，由Apache提供的一套开源api，用于简化对javaBean的操作，能够对基本类型自动转换。</li>
+<li>Spring的BeanUtils：BeanUtils是Spring框架提供的对Java反射和自省API的包装。其主要目的是利用反射机制对JavaBean的属性进行处理。</li>
+<li>Mapstruct：<blockquote>
+<p>MapStruct是一个Java 注释处理器，用于为Java Bean类生成类型安全和高性能的映射器。它使您不必手工编写映射代码，这是一个繁琐且容易出错的任务。该生成器具有合理的默认值和许多内置的类型转换，但是在配置或实现特殊行为时，它会自动退出。<br>与运行时工作的映射框架相比，MapStruct具有以下优点：</p>
+<ul>
+<li>通过使用普通方法调用而不是反射来快速执行</li>
+<li>编译时类型安全。只能映射彼此映射的对象和属性，因此不会将订单实体意外映射到客户DTO等。</li>
+<li>自包含代码 -没有运行时依赖项</li>
+<li>如果发生以下情况，则在构建时清除错误报告：<ul>
+<li>映射不完整（并非所有目标属性都被映射）</li>
+<li>映射不正确（找不到正确的映射方法或类型转换）</li>
+</ul>
+</li>
+<li>易于调试的映射代码（或手动编辑，例如在生成器中有错误的情况下）<br><a href="https://github.com/mapstruct/mapstruct" target="_blank" rel="noopener">github mapstruct/mapstruct</a></li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<ol start="4">
+<li>BeanCopier：BeanCopier是Cglib包中的一个类，用于对象的复制。目标对象必须先实例化  而且对象必须要有setter方法。  </li>
+</ol>
+<hr>
+<p>时间出真知，我使用的是相同的数据集，对每种方式都进行了测试。实体类如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">public class UserVo &#123;</span><br><span class="line"></span><br><span class="line">    private String id;</span><br><span class="line"></span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    private Integer age;</span><br><span class="line"></span><br><span class="line">    private String city;</span><br><span class="line"></span><br><span class="line">    private String sex;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最终的测试结果如下：</p>
+<table>
 <thead>
 <tr>
-<th>名字</th>
-<th>简写</th>
-<th>默认</th>
-<th>描述</th>
+<th>数据量</th>
+<th>Apache</th>
+<th>Spring</th>
+<th>MapStruct</th>
+<th>BeanCopier</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>--details</code></td>
-<td></td>
-<td></td>
-<td>显示提供给日志的额外细节</td>
+<td>100w</td>
+<td>391ms</td>
+<td>250ms</td>
+<td>45ms</td>
+<td>57ms</td>
 </tr>
 <tr>
-<td><code>--follow</code></td>
-<td><code>-f</code></td>
-<td></td>
-<td>按照日志输出 <code>(查看实时日志)</code></td>
+<td>10w</td>
+<td>82ms</td>
+<td>34ms</td>
+<td>8ms</td>
+<td>10ms</td>
 </tr>
 <tr>
-<td><code>--since</code></td>
-<td></td>
-<td></td>
-<td>自时间戳（例如2013-01-02T13：23：37）<br>或相对（例如42分钟42分钟）开始显示日志 <br><code>（日志显示起始时间）</code></td>
+<td>1w</td>
+<td>30ms</td>
+<td>19ms</td>
+<td>2ms</td>
+<td>7ms</td>
 </tr>
 <tr>
-<td><code>--tail</code></td>
-<td></td>
-<td><code>--all</code></td>
-<td>从日志末尾显示的行数</td>
+<td>1k</td>
+<td>15ms</td>
+<td>6ms</td>
+<td>1ms</td>
+<td>5ms</td>
 </tr>
 <tr>
-<td><code>--timestamps</code></td>
-<td><code>-t</code></td>
-<td></td>
-<td>显示时间戳</td>
+<td>100</td>
+<td>5ms</td>
+<td>3ms</td>
+<td>1ms</td>
+<td>4ms</td>
 </tr>
 <tr>
-<td><code>--until</code></td>
-<td></td>
-<td></td>
-<td>在时间戳（例如2013-01-02T13：23：37）<br>或相对（例如42分钟42分钟）之前显示日志<br><code>（日志显示结束时间）</code></td>
+<td>10</td>
+<td>2ms</td>
+<td>1ms</td>
+<td>1ms</td>
+<td>4ms</td>
 </tr>
 </tbody></table>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/01/05/002/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<p>根据测试结果，我们可以得出在速度方面，MapStruct是最好的，执行速度是 Apache BeanUtils 的10倍、Spring BeanUtils 的 4-5倍、和 BeanCopier 的速度差不多。<br>由此可以看出，在大数据量级的情况下，MapStruct 和 BeanCopier 都有着较高的性能优势，其中 MapStruct 尤为优秀。如果你仅是在日常处理少量的对象时，选取哪个其实变得并不重要，但数据量大时建议还是使用MapStruct 或 BeanCopier 的方式，提高接口性能。  </p>
+<p>当然，这个数据并没有考虑占用的内存和CPU的资源问题，仅仅是测试了在相同环境下的执行速度。  </p>
+<p>最后，如果你问我在日常选取哪种方式？我当然是选择使用 Spring 的 BeanUtils 了。虽然它的性能不是最优的，但是我日常也不会出现数十万级数据量的情况，Spring BeanUtils 对我来说完全够用了，同时在使用spring时不必再引入新的依赖包，何乐而不为不呢。所以来说，适用于自身场景的才是最好的，不必要过分追求性能。但当有一天你遇到需要处理较大数据量级的对象时，请记得还有性能更加优秀的MapStruct 和 BeanCopier 供你选择。  </p>
+
       
     </div>
     
@@ -446,181 +480,40 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  <div>
-    
-  </div>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/05/001/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="乐游">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/WechatIMG22.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="乐游さん 的博客~">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/05/001/" itemprop="url">你好，我的2020</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-05T12:00:00+08:00">
-                2020-01-05
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-05T19:29:57+08:00">
-                2020-01-05
-              </time>
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/JAVA-bean-spring-%E5%AF%B9%E8%B1%A1%E6%8B%B7%E8%B4%9D/" rel="tag"># JAVA bean spring 对象拷贝</a>
           
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/01/05/001/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/01/05/001/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>你好，我的2020。<br>2020年开始了，</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/18/008/" rel="next" title="Google PR算法">
+                <i class="fa fa-chevron-left"></i> Google PR算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/06/010/" rel="prev" title="stream 流处理 Java 集合遇到的异常">
+                stream 流处理 Java 集合遇到的异常 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
       
     </footer>
   </div>
@@ -629,18 +522,21 @@
   
   <div>
     
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------ 本文结束------</div>
+    
+</div>
+    
   </div>
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/">&lt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -648,6 +544,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -886,6 +789,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
