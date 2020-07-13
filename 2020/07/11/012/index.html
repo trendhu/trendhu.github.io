@@ -464,7 +464,7 @@
 </tbody></table>
 <p>根据测试结果，我们可以得出在速度方面，MapStruct是最好的，执行速度是 Apache BeanUtils 的10倍、Spring BeanUtils 的 4-5倍、和 BeanCopier 的速度差不多。<br>由此可以看出，在大数据量级的情况下，MapStruct 和 BeanCopier 都有着较高的性能优势，其中 MapStruct 尤为优秀。如果你仅是在日常处理少量的对象时，选取哪个其实变得并不重要，但数据量大时建议还是使用MapStruct 或 BeanCopier 的方式，提高接口性能。  </p>
 <p>当然，这个数据并没有考虑占用的内存和CPU的资源问题，仅仅是测试了在相同环境下的执行速度。  </p>
-<p>最后，如果你问我在日常选取哪种方式？我当然是选择使用 Spring 的 BeanUtils 了。虽然它的性能不是最优的，但是我日常也不会出现数十万级数据量的情况，Spring BeanUtils 对我来说完全够用了，同时在使用spring时不必再引入新的依赖包，何乐而不为不呢。所以来说，适用于自身场景的才是最好的，不必要过分追求性能。但当有一天你遇到需要处理较大数据量级的对象时，请记得还有性能更加优秀的MapStruct 和 BeanCopier 供你选择。  </p>
+<p>最后，如果你问我在日常选取哪种方式？我当然是选择使用 Spring 的 BeanUtils 了。虽然它的性能不是最优的，但是我日常也不会出现数十万级数据量的情况，Spring BeanUtils 对我来说完全够用了，同时在使用spring时不必再引入新的依赖包，何乐而不为不呢。所以来说，适用于自身场景的才是最好的，不必要过分追求性能。<br>但当有一天你遇到需要处理较大数据量级的对象时，请记得还有性能更加优秀的MapStruct 和 BeanCopier 供你选择。  </p>
 
       
     </div>
@@ -646,7 +646,17 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?0492d48b6af5d10264fc93e94120c17c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
