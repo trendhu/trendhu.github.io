@@ -385,7 +385,9 @@
 
       
         
-          <h2 id="nginx日志分析工具-GoAccess"><a href="#nginx日志分析工具-GoAccess" class="headerlink" title="nginx日志分析工具:GoAccess"></a>nginx日志分析工具:GoAccess</h2><p>官方地址： <a href="https://goaccess.io" target="_blank" rel="noopener">https://goaccess.io</a></p>
+          <p>官方地址： <a href="https://goaccess.io" target="_blank" rel="noopener">https://goaccess.io</a></p>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>GoAccess 被设计成快速的并基于终端的日志分析工具。其核心理念是不需要通过 Web 浏览器就能快速分析并实时查看 Web 服务器的统计数据(这对于需要使用 SSH 来对访问日志进行快速分析或者就是喜欢在终端环境下工作的人来说是超赞的)。</p>
+<p>终端输出仅仅是默认的输出方式，GoAccess 还支持生成完整的实时 HTML 报告(这对分析、监控以及数据可视化都是极好的)，以及 JSON 和 CSV 格式的报告。</p>
 <h4 id="一、安装goaccess"><a href="#一、安装goaccess" class="headerlink" title="一、安装goaccess"></a>一、安装goaccess</h4><h5 id="1、安装依赖库"><a href="#1、安装依赖库" class="headerlink" title="1、安装依赖库"></a>1、安装依赖库</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y GeoIP-devel ncurses-devel</span><br></pre></td></tr></table></figure>
 
 <h5 id="2、下载并安装GoAccess"><a href="#2、下载并安装GoAccess" class="headerlink" title="2、下载并安装GoAccess"></a>2、下载并安装GoAccess</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://tar.goaccess.io/goaccess-1.4.5.tar.gz</span><br><span class="line">tar -xzvf goaccess-1.4.5.tar.gz</span><br><span class="line"><span class="built_in">cd</span> goaccess-1.4.5/</span><br><span class="line">./configure --<span class="built_in">enable</span>-utf8 --<span class="built_in">enable</span>-geoip=legacy</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
