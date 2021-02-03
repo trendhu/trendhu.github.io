@@ -385,45 +385,19 @@
 
       
         
-          
-            <h2 id="nginx日志分析工具-GoAccess"><a href="#nginx日志分析工具-GoAccess" class="headerlink" title="nginx日志分析工具:GoAccess"></a>nginx日志分析工具:GoAccess</h2><p>官方地址： <a href="https://goaccess.io" target="_blank" rel="noopener">https://goaccess.io</a></p>
+          <h2 id="nginx日志分析工具-GoAccess"><a href="#nginx日志分析工具-GoAccess" class="headerlink" title="nginx日志分析工具:GoAccess"></a>nginx日志分析工具:GoAccess</h2><p>官方地址： <a href="https://goaccess.io" target="_blank" rel="noopener">https://goaccess.io</a></p>
 <h4 id="一、安装goaccess"><a href="#一、安装goaccess" class="headerlink" title="一、安装goaccess"></a>一、安装goaccess</h4><h5 id="1、安装依赖库"><a href="#1、安装依赖库" class="headerlink" title="1、安装依赖库"></a>1、安装依赖库</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y GeoIP-devel ncurses-devel</span><br></pre></td></tr></table></figure>
 
 <h5 id="2、下载并安装GoAccess"><a href="#2、下载并安装GoAccess" class="headerlink" title="2、下载并安装GoAccess"></a>2、下载并安装GoAccess</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://tar.goaccess.io/goaccess-1.4.5.tar.gz</span><br><span class="line">tar -xzvf goaccess-1.4.5.tar.gz</span><br><span class="line"><span class="built_in">cd</span> goaccess-1.4.5/</span><br><span class="line">./configure --<span class="built_in">enable</span>-utf8 --<span class="built_in">enable</span>-geoip=legacy</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
 <p>注：如果你觉得麻烦，也可通过<code>yum</code>进行安装</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install goaccess</span><br></pre></td></tr></table></figure>
-
-<h5 id="3、配置日志格式"><a href="#3、配置日志格式" class="headerlink" title="3、配置日志格式"></a>3、配置日志格式</h5><p>配置文件位于：/usr/local/etc/goaccess/goaccess.conf</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">time-format %H:%M:%S</span><br><span class="line">date-format %d/%b/%Y</span><br><span class="line"><span class="built_in">log</span>-format %h - %^ [%d:%t %^]; <span class="string">"%r"</span> %s %b <span class="string">"%R"</span> - %^<span class="string">"%u"</span> - %^ %T</span><br></pre></td></tr></table></figure>
-
-<h5 id="4、使用终端分析日志结果"><a href="#4、使用终端分析日志结果" class="headerlink" title="4、使用终端分析日志结果"></a>4、使用终端分析日志结果</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">goaccess -a -d -f /var/<span class="built_in">log</span>/nginx/access.log</span><br></pre></td></tr></table></figure>
-<img src="https://hyz-picgo-img.oss-cn-beijing.aliyuncs.com/20210203155639.png"/>
-
-<h4 id="二、使用定时器以HTML格式输出分析结果"><a href="#二、使用定时器以HTML格式输出分析结果" class="headerlink" title="二、使用定时器以HTML格式输出分析结果"></a>二、使用定时器以HTML格式输出分析结果</h4><h5 id="1、编写脚本文件"><a href="#1、编写脚本文件" class="headerlink" title="1、编写脚本文件"></a>1、编写脚本文件</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#分析报告存放路径</span></span><br><span class="line">mkdir -p /data/www/goaccess/html</span><br><span class="line"><span class="comment">#分析脚本存放路径</span></span><br><span class="line">mkdir -p /usr/<span class="built_in">local</span>/goaccess/scripts</span><br><span class="line"><span class="comment">#获取HTML分析报告</span></span><br><span class="line">vim /usr/<span class="built_in">local</span>/goaccess/scripts/getHtmlReport-项目名称.sh</span><br></pre></td></tr></table></figure>
-<ul>
-<li>getHtmlReport-项目名称.sh内容如下:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#页面转换为中文</span></span><br><span class="line">LANG=<span class="string">"zh_CN.UTF-8"</span></span><br><span class="line"><span class="comment">#输出HTML分析报告</span></span><br><span class="line">goaccess -a -d -f /var/<span class="built_in">log</span>/nginx/access.log -o /data/www/goaccess/html/report-项目名称.html</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h5 id="2、分配脚本可执行权限："><a href="#2、分配脚本可执行权限：" class="headerlink" title="2、分配脚本可执行权限："></a>2、分配脚本可执行权限：</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 755 /usr/<span class="built_in">local</span>/goaccess/scripts/getHtmlReport-项目名称.sh</span><br></pre></td></tr></table></figure>
-
-<h5 id="3、添加定时任务"><a href="#3、添加定时任务" class="headerlink" title="3、添加定时任务"></a>3、添加定时任务</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#新增定时任务</span></span><br><span class="line">crontab -e</span><br><span class="line"></span><br><span class="line"><span class="comment">#定时生成项目的nginx日志分析html报告</span></span><br><span class="line">0 0 * * * /bin/bash /usr/<span class="built_in">local</span>/goaccess/scripts/getHtmlReport-项目名称.sh</span><br></pre></td></tr></table></figure>
-<h5 id="4、配置nginx访问路径"><a href="#4、配置nginx访问路径" class="headerlink" title="4、配置nginx访问路径"></a>4、配置nginx访问路径</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#用alias将它重定向到所指定的html中</span></span><br><span class="line">location /report-项目名称.html &#123;</span><br><span class="line">    <span class="built_in">alias</span> /data/www/goaccess/html/report-项目名称.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="三、nginx访问权限设置"><a href="#三、nginx访问权限设置" class="headerlink" title="三、nginx访问权限设置"></a>三、nginx访问权限设置</h4><p>nginx配置访问密码，让用户输入用户名密码才能访问(basicAuth)</p>
-<p style="color:red">注：如果你是在内网进行使用，或者不考虑访问控制的问题，可以不进行 nginx 访问权限的设置</p>
-
-<h5 id="1、安装htpassed工具"><a href="#1、安装htpassed工具" class="headerlink" title="1、安装htpassed工具"></a>1、安装htpassed工具</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install httpd-tools</span><br></pre></td></tr></table></figure>
-
-<h5 id="2、设置用户名和密码，并把用户名、密码保存到指定文件中："><a href="#2、设置用户名和密码，并把用户名、密码保存到指定文件中：" class="headerlink" title="2、设置用户名和密码，并把用户名、密码保存到指定文件中："></a>2、设置用户名和密码，并把用户名、密码保存到指定文件中：</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">htpasswd -c [passwfile] [username]</span><br><span class="line"></span><br><span class="line"><span class="comment">#例：htpasswd -c /etc/nginx/passwd you</span></span><br></pre></td></tr></table></figure>
-<img src="https://hyz-picgo-img.oss-cn-beijing.aliyuncs.com/20210203155347.png"/>
-注意：/etc/nginx/passwd 是生成密码后的文件保存路径(passwdfile)，codeauth是用户名（username）
-
-<p>验证方法：查看最后生成的密码文件<code>/etc/nginx/passwd</code>的内容，分号后的内容就是加密过的密码。</p>
-<h5 id="3、修改nginx配置文件"><a href="#3、修改nginx配置文件" class="headerlink" title="3、修改nginx配置文件"></a>3、修改nginx配置文件</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen 443 ssl;</span><br><span class="line">        ......</span><br><span class="line">        </span><br><span class="line">        location /report-armstrong.html &#123;</span><br><span class="line">            <span class="comment">#新增下面两行</span></span><br><span class="line">            auth_basic <span class="string">"Please input password"</span>; <span class="comment">#这里是验证时的提示信息 </span></span><br><span class="line">            auth_basic_user_file /etc/nginx/passwd;</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">alias</span> /data/www/goaccess/html/report-armstrong.html;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h5 id="4、重启nginx并访问"><a href="#4、重启nginx并访问" class="headerlink" title="4、重启nginx并访问"></a>4、重启nginx并访问</h5><p>重启nginx，在浏览器中访问<code>/report-armstrong.html</code>，输入用户名和密码查看对应数据<br><img src="https://hyz-picgo-img.oss-cn-beijing.aliyuncs.com/20210203155017.png"/></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/02/03/014/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
