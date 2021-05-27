@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JAVA Quarkus," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="说明：本文基本翻译自 Quarkus 官方指南的《Be Guided Through First Application》 一文，本文仅在其基础上进行了一定的补充说明和裁剪。 Quarkus简介Quarkus 是一个为 Java 虚拟机（JVM）和原生编译而设计的全堆栈 Kubernetes 原生Java 框架，用于专门针对容器优化  Java，并使其成为无服务器、云和 Kubernetes 环境">
+<meta property="og:type" content="article">
+<meta property="og:title" content="创建一个Quarkus应用程序">
+<meta property="og:url" content="http://yoursite.com/2021/05/27/016/index.html">
+<meta property="og:site_name" content="乐游さん 的博客~">
+<meta property="og:description" content="说明：本文基本翻译自 Quarkus 官方指南的《Be Guided Through First Application》 一文，本文仅在其基础上进行了一定的补充说明和裁剪。 Quarkus简介Quarkus 是一个为 Java 虚拟机（JVM）和原生编译而设计的全堆栈 Kubernetes 原生Java 框架，用于专门针对容器优化  Java，并使其成为无服务器、云和 Kubernetes 环境">
+<meta property="article:published_time" content="2021-05-27T08:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-27T08:00:00.000Z">
+<meta property="article:author" content="乐游">
+<meta property="article:tag" content="JAVA Quarkus">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/05/27/016/"/>
+
+
+
+
+
+  <title>创建一个Quarkus应用程序 | 乐游さん 的博客~</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0492d48b6af5d10264fc93e94120c17c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+     
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">乐游さん 的博客~</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">一直来自北方的程序猿 ~ </h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/27/016/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乐游">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/WechatIMG22.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="乐游さん 的博客~">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">创建一个Quarkus应用程序</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-27T16:00:00+08:00">
+                2021-05-27
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-05-27T16:00:00+08:00">
+                2021-05-27
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/05/27/016/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/05/27/016/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><font size=4 color="#F75000">说明：本文基本翻译自 Quarkus 官方指南的<a href="https://quarkus.io/guides/getting-started" target="_blank" rel="noopener">《Be Guided Through First Application》</a> 一文，本文仅在其基础上进行了一定的补充说明和裁剪。</font></p>
+<h3 id="Quarkus简介"><a href="#Quarkus简介" class="headerlink" title="Quarkus简介"></a>Quarkus简介</h3><p>Quarkus 是一个为 Java 虚拟机（JVM）和原生编译而设计的全堆栈 Kubernetes 原生Java 框架，用于专门针对容器优化  Java，并使其成为无服务器、云和 Kubernetes 环境的高效平台。</p>
+<p>虽然开源时间较短，但是生态方面也已经达到可用的状态，自身包含扩展框架，已经支持像 Netty、Undertow、Hibernate、JWT 等框架，足以用于开发企业级应用，用户也可以基于扩展框架自行扩展。</p>
+<p>Quarkus 除了支持 jvm 的运行模式外，还支持 native 模式。native 模式类似于 C/C++，需要预先编译生成可执行文件。由于不需要 jvm，所以可以做到毫秒级别的启动，而且启动所需的内存也非常少。因此native模式非常适合 serverless 架构的实现。</p>
+<a id="more"></a>
+
+<h3 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h3><ul>
+<li>一个IDE</li>
+<li>安装了JAVA_HOME正确配置的JDK 8或11+ (这里建议使用GraalVM 21+ 的java11版本，便于后续将quarkus项目打包为native程序，本文使用的环境为<br><code>GraalVM CE 21.1.0 (build 11.0.11+8-jvmci-21.1-b05)</code><br>）</li>
+<li>Apache Maven 3.6.2以上。如果您安装了多个JDK，不确定Maven在运行时是否会选择预期的Java，错误的Java版本最终可能会导致意外的结果，甚至无法进行打包和编译。您可以通过运行<code>mvn --version</code>来验证使用哪个JDK Maven。</li>
+</ul>
+<h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><p>创建新的Quarkus项目的最简单方法是打开一个终端并运行以下命令：</p>
+<p>对于Linux和MacOS用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mvn io.quarkus:quarkus-maven-plugin:1.13.4.Final:create \</span><br><span class="line">    -DprojectGroupId=org.acme \</span><br><span class="line">    -DprojectArtifactId=getting-started \</span><br><span class="line">    -DclassName=<span class="string">"org.acme.getting.started.GreetingResource"</span> \</span><br><span class="line">    -Dpath=<span class="string">"/hello"</span></span><br><span class="line"><span class="built_in">cd</span> getting-started</span><br></pre></td></tr></table></figure>
+<p>对于Windows用户</p>
+<ul>
+<li>如果使用cmd，（请不要使用反斜杠 \ ）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn io.quarkus:quarkus-maven-plugin:1.13.4.Final:create -DprojectGroupId=org.acme -DprojectArtifactId=getting-started -DclassName=<span class="string">"org.acme.getting.started.GreetingResource"</span> -Dpath=<span class="string">"/hello"</span></span><br></pre></td></tr></table></figure></li>
+<li>如果使用Powershell，则将-D参数用双引号引起来<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn io.quarkus:quarkus-maven-plugin:1.13.4.Final:create <span class="string">"-DprojectGroupId=org.acme"</span> <span class="string">"-DprojectArtifactId=getting-started"</span> <span class="string">"-DclassName=org.acme.getting.started.GreetingResource"</span> <span class="string">"-Dpath=/hello"</span></span><br></pre></td></tr></table></figure>
+命令会自动生成以下内容 ./getting-started：</li>
+<li>Maven项目的结构文件和目录</li>
+<li>org.acme.getting.started.GreetingResource文件中暴露出的Web资源路径 /hello</li>
+<li>相关的单元测试文件和目录</li>
+<li><a href="http://localhost:8080启动应用程序后可访问的登录页面">http://localhost:8080启动应用程序后可访问的登录页面</a></li>
+<li>src/main/docker 目录下存放着 native 和 jvm 模式下的 Dockerfile 文件示例</li>
+<li>应用程序配置文件</li>
+</ul>
+<p>项目生成后，查看pom.xml文件，你可以看到Quarkus导入的控件（依赖项）清单，允许您忽略不同Quarkus依赖项上的版本。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.quarkus<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>quarkus-universe-bom<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;quarkus.platform.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>JAX-RS资源<br>在项目创建期间，已创建src/main/java/org/acme/getting/started/GreetingResource.java文件并包含以下内容：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.acme.getting.started;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.ws.rs.GET;</span><br><span class="line"><span class="keyword">import</span> javax.ws.rs.Path;</span><br><span class="line"><span class="keyword">import</span> javax.ws.rs.Produces;</span><br><span class="line"><span class="keyword">import</span> javax.ws.rs.core.MediaType;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Path</span>(<span class="string">"/hello"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GreetingResource</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GET</span></span><br><span class="line">    <span class="meta">@Produces</span>(MediaType.TEXT_PLAIN)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这就是编写的web接口的代码逻辑。这是一个非常简单的REST端点，对/hello发起GET请求你将得到返回值“hello”。</p>
+<p>使用Quarkus时，开发人员并不需要创建Application启动类。当然，如果你想写的话它也是受支持的，但不是必需的。另外，默认情况下仅会创建资源的一个实例，而不为每个请求创建一个。不过你可以通过配置不同的*Scoped注解（ApplicationScoped，RequestScoped等）来实现不同的资源作用域。</p>
+<h3 id="运行应用程序"><a href="#运行应用程序" class="headerlink" title="运行应用程序"></a>运行应用程序</h3><p>程序生成后就可以运行了，运行命令为<code>./mvnw compile quarkus:dev</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ ./mvnw compile quarkus:dev</span><br><span class="line">[INFO] --------------------&lt; org.acme:getting-started &gt;---------------------</span><br><span class="line">[INFO] Building getting-started 1.0.0-SNAPSHOT</span><br><span class="line">[INFO] --------------------------------[ jar ]---------------------------------</span><br><span class="line">[INFO]</span><br><span class="line">[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ getting-started ---</span><br><span class="line">[INFO] Using <span class="string">'UTF-8'</span> encoding to copy filtered resources.</span><br><span class="line">[INFO] skip non existing resourceDirectory /Users/starksm/Dev/JBoss/Quarkus/starksm64-quarkus-quickstarts/getting-started/src/main/resources</span><br><span class="line">[INFO]</span><br><span class="line">[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ getting-started ---</span><br><span class="line">[INFO] Changes detected - recompiling the module!</span><br><span class="line">[INFO] Compiling 2 <span class="built_in">source</span> files to /Users/starksm/Dev/JBoss/Quarkus/starksm64-quarkus-quickstarts/getting-started/target/classes</span><br><span class="line">[INFO]</span><br><span class="line">[INFO] --- quarkus-maven-plugin:&lt;version&gt;:dev (default-cli) @ getting-started ---</span><br><span class="line">Listening <span class="keyword">for</span> transport dt_socket at address: 5005</span><br><span class="line">2019-02-28 17:05:22,347 INFO  [io.qua.dep.QuarkusAugmentor] (main) Beginning quarkus augmentation</span><br><span class="line">2019-02-28 17:05:22,635 INFO  [io.qua.dep.QuarkusAugmentor] (main) Quarkus augmentation completed <span class="keyword">in</span> 288ms</span><br><span class="line">2019-02-28 17:05:22,770 INFO  [io.quarkus] (main) Quarkus started <span class="keyword">in</span> 0.668s. Listening on: http://localhost:8080</span><br><span class="line">2019-02-28 17:05:22,771 INFO  [io.quarkus] (main) Installed features: [cdi, resteasy]</span><br></pre></td></tr></table></figure>
+<p>启动后，您可以通过curl尝试请求提供的端点:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -w <span class="string">"\n"</span> http://localhost:8080/hello</span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
+<p>点击按键<code>CTRL+C</code>停止该应用程序</p>
+<h3 id="使用注入"><a href="#使用注入" class="headerlink" title="使用注入"></a>使用注入</h3><p>Quarkus中的依赖注入基于ArC，ArC是为Quarkus架构量身定制的基于CDI的依赖注入解决方案。如果您不熟悉CDI，建议您阅读<a href="https://quarkus.io/guides/cdi" target="_blank" rel="noopener">CDI简介</a>指南。</p>
+<p>Quarkus仅实现CDI功能的一个子集，并具有非标准功能和特定的APIS，您可以在<a href="https://quarkus.io/guides/cdi-reference" target="_blank" rel="noopener">Contexts and Dependency Injection指南</a>中了解有关它的更多信息。</p>
+<p>通过引入依赖项quarkus-resteasy可以很方便的使用ArC：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.quarkus<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>quarkus-resteasy-reactive<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>现在尝试在应用程序并添加一个 companion bean。创建src/main/java/org/acme/getting/started/GreetingService.java文件并编写以下内容：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.acme.getting.started;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.enterprise.context.ApplicationScoped;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ApplicationScoped</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GreetingService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">greeting</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello "</span> + name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编辑GreetingResource类将GreetingService注入，并使用它创建一个新的端点：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.acme.getting.started;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.inject.Inject;</span><br><span class="line"><span class="keyword">import</span> javax.ws.rs.GET;</span><br><span class="line"><span class="keyword">import</span> javax.ws.rs.Path;</span><br><span class="line"><span class="keyword">import</span> javax.ws.rs.Produces;</span><br><span class="line"><span class="keyword">import</span> javax.ws.rs.core.MediaType;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.jboss.resteasy.annotations.jaxrs.PathParam;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Path</span>(<span class="string">"/hello"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GreetingResource</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Inject</span></span><br><span class="line">    GreetingService service;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GET</span></span><br><span class="line">    <span class="meta">@Produces</span>(MediaType.TEXT_PLAIN)</span><br><span class="line">    <span class="meta">@Path</span>(<span class="string">"/greeting/&#123;name&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">greeting</span><span class="params">(@PathParam String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> service.greeting(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GET</span></span><br><span class="line">    <span class="meta">@Produces</span>(MediaType.TEXT_PLAIN)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再次启动程序<code>./mvnw compile quarkus:dev</code>。检查端点是否按预期返回了内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -w <span class="string">"\n"</span> http://localhost:8080/hello/greeting/quarkus</span><br><span class="line">hello quarkus</span><br></pre></td></tr></table></figure>
+
+<h3 id="扩展模块"><a href="#扩展模块" class="headerlink" title="扩展模块"></a>扩展模块</h3><p><code>quarkus:dev</code>在开发模式下运行Quarkus。这样可以通过后台编译实现热部署，这意味着当您修改Java文件或资源文件并刷新浏览器时，这些更改将自动生效。这对于资源文件（如配置属性文件）也适用。刷新浏览器会触发对工作区的扫描，如果检测到任何更改，将重新编译Java文件并重新部署应用程序；然后，重新部署的应用程序将为您的请求提供服务。如果编译或部署有任何问题，则会显示错误页面。</p>
+<p>这还将在port上侦听调试器 <strong>5005</strong>。如果要在运行之前等待调试器附加，可以<code>-Dsuspend</code>在命令行中传递。如果您根本不想使用调试器，则可以使用<code>-Ddebug=false</code>。</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>好的，到目前为止，一切都很好，但是为了以防万一，通过一些测试会更好。</p>
+<p>在生成的pom.xml文件中，您可以看到2个测试依赖项：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.quarkus<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>quarkus-junit5<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.rest-assured<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>rest-assured<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Quarkus支持Junit 5测试。但使用时必须设置Surefire Maven插件的版本，因为默认版本不支持Junit 5：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-surefire-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;surefire-plugin.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">systemPropertyVariables</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">java.util.logging.manager</span>&gt;</span>org.jboss.logmanager.LogManager<span class="tag">&lt;/<span class="name">java.util.logging.manager</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">maven.home</span>&gt;</span>$&#123;maven.home&#125;<span class="tag">&lt;/<span class="name">maven.home</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">systemPropertyVariables</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们还设置了<code>java.util.logging</code>系统属性，以确保测试将使用正确的logmanager，并且<code>maven.home</code>确保从<code>${maven.home}/conf/settings.xml</code>应用了自定义配置（如果有）。</p>
+<p>生成的项目包含一个简单的测试。创建src/test/java/org/acme/getting/started/GreetingResourceTest.java文件并编写以下内容：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.acme.getting.started;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.quarkus.test.junit.QuarkusTest;</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.UUID;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> io.restassured.RestAssured.given;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.CoreMatchers.is;</span><br><span class="line"></span><br><span class="line"><span class="meta">@QuarkusTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GreetingResourceTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span> <span class="comment">// 通过使用运行QuarkusTest程序，您可以指示JUnit在测试之前启动应用程序。</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testHelloEndpoint</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        given()</span><br><span class="line">          .when().get(<span class="string">"/hello"</span>)</span><br><span class="line">          .then()</span><br><span class="line">             .statusCode(<span class="number">200</span>) <span class="comment">// 检查HTTP响应状态代码和内容</span></span><br><span class="line">             .body(is(<span class="string">"hello"</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGreetingEndpoint</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String uuid = UUID.randomUUID().toString();</span><br><span class="line">        given()</span><br><span class="line">          .pathParam(<span class="string">"name"</span>, uuid)</span><br><span class="line">          .when().get(<span class="string">"/hello/greeting/&#123;name&#125;"</span>)</span><br><span class="line">          .then()</span><br><span class="line">            .statusCode(<span class="number">200</span>)</span><br><span class="line">            .body(is(<span class="string">"hello "</span> + uuid));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>您可以使用Maven运行这些测试程序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mvnw <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<p>您也可以直接从IDE运行测试（确保首先停止了应用程序）。</p>
+<h3 id="打包并运行应用程序"><a href="#打包并运行应用程序" class="headerlink" title="打包并运行应用程序"></a>打包并运行应用程序</h3><p>该应用程序使用打包./mvnw package。它产生以下几个输出/target：</p>
+<ul>
+<li>getting-started-1.0.0-SNAPSHOT.jar-仅包含项目的类和资源，这是Maven构建产生的常规工件-它不是可运行的jar；</li>
+<li>quarkus-app包含quarkus-run.jarjar文件的目录-是可执行jar。请注意，这不是über-jar，因为依赖项已复制到的子目录中quarkus-app/lib/。</li>
+<li>您可以使用以下命令运行该应用程序：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar target/quarkus-app/quarkus-run.jar</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果要将应用程序部署到某个地方（通常在容器中），则需要部署整个quarkus-app目录。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>在运行该应用程序之前，请不要忘记停止热重载模式（点击CTRL+C），否则您将遇到端口冲突。</p>
+</blockquote>
+<h4 id="打包成Native"><a href="#打包成Native" class="headerlink" title="打包成Native"></a>打包成Native</h4><p>如果你希望将项目打包成native程序，享受快速启动的特性，你可以通过配置 <code>pom.xml</code> 文件增加对于 native 的配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.quarkus<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>quarkus-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;quarkus-plugin.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">extensions</span>&gt;</span>true<span class="tag">&lt;/<span class="name">extensions</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goal</span>&gt;</span>build<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goal</span>&gt;</span>generate-code<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goal</span>&gt;</span>generate-code-tests<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;compiler-plugin.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">parameters</span>&gt;</span>$&#123;maven.compiler.parameters&#125;<span class="tag">&lt;/<span class="name">parameters</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-surefire-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;surefire-plugin.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">systemPropertyVariables</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">java.util.logging.manager</span>&gt;</span>org.jboss.logmanager.LogManager<span class="tag">&lt;/<span class="name">java.util.logging.manager</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">maven.home</span>&gt;</span>$&#123;maven.home&#125;<span class="tag">&lt;/<span class="name">maven.home</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">systemPropertyVariables</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profiles</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>native<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">name</span>&gt;</span>native<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-failsafe-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;surefire-plugin.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">goal</span>&gt;</span>integration-test<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">goal</span>&gt;</span>verify<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">systemPropertyVariables</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">native.image.path</span>&gt;</span></span><br><span class="line">                                        $&#123;project.build.directory&#125;/$&#123;project.build.finalName&#125;-runner</span><br><span class="line">                                    <span class="tag">&lt;/<span class="name">native.image.path</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">java.util.logging.manager</span>&gt;</span>org.jboss.logmanager.LogManager</span><br><span class="line">                                    <span class="tag">&lt;/<span class="name">java.util.logging.manager</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">maven.home</span>&gt;</span>$&#123;maven.home&#125;<span class="tag">&lt;/<span class="name">maven.home</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;/<span class="name">systemPropertyVariables</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">quarkus.package.type</span>&gt;</span>native<span class="tag">&lt;/<span class="name">quarkus.package.type</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>配置完成后，你可以使用如下命令进行打包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mvnw package -Pnative</span><br></pre></td></tr></table></figure>
+<p>打包的前提是你需要将mvn使用的Java版本设置为GraalVM 21+，具体版本文章开头已进行了说明。</p>
+<blockquote>
+<p>本文所使用的版本为 GraalVM CE 21.1.0 (build 11.0.11+8-jvmci-21.1-b05)</p>
+</blockquote>
+<p>打包完成后会在 <code>/target</code> 路径下生成一个可执行文件：<code>getting-started-reactive-1.0.0-SNAPSHOT-runner</code>，该文件即为我们需要的目标文件，执行命令<code>./getting-started-reactive-1.0.0-SNAPSHOT-runner</code> 即可完成服务的启动。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ ./getting-started-reactive-1.0.0-SNAPSHOT-runner</span><br><span class="line">__  ____  __  _____   ___  __ ____  ______ </span><br><span class="line"> --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ </span><br><span class="line"> -/ /_/ / /_/ / __ |/ , _/ ,&lt; / /_/ /\ \   </span><br><span class="line">--\___\_\____/_/ |_/_/|_/_/|_|\____/___/   </span><br><span class="line">2021-05-27 10:41:39,559 INFO  [io.quarkus] (main) getting-started-reactive 1.0.0-SNAPSHOT native (powered by Quarkus 1.13.4.Final) started <span class="keyword">in</span> 0.019s. Listening on: http://0.0.0.0:8080</span><br><span class="line">2021-05-27 10:41:39,862 INFO  [io.quarkus] (main) Profile prod activated. </span><br><span class="line">2021-05-27 10:41:39,862 INFO  [io.quarkus] (main) Installed features: [cdi, mutiny, resteasy-reactive, smallrye-context-propagation]</span><br></pre></td></tr></table></figure>
+<p>点击按键<code>CTRL+C</code>停止该应用程序</p>
+<h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>致此，你已经可以使用 Quarkus 进行开发部署了，当然还有更多的内容需要学习。如果想了解更多的使用方法，可以通过 <a href="https://quarkus.io/guides/" target="_blank" rel="noopener"><strong>Quarkus官网指南</strong></a> 继续进行学习。</p>
+<hr>
+<p>最后，感谢你的阅读，愿你的人生了无Bug。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JAVA-Quarkus/" rel="tag"># JAVA Quarkus</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/04/14/015/" rel="next" title="Sublime Text 3 快捷键汇总">
+                <i class="fa fa-chevron-left"></i> Sublime Text 3 快捷键汇总
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/05/28/018/" rel="prev" title="Mac下安装Jmeter">
+                Mac下安装Jmeter <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------ 本文结束------</div>
+    
+</div>
+    
+  </div>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/WechatIMG22.jpeg"
+                alt="乐游" />
+            
+              <p class="site-author-name" itemprop="name">乐游</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Quarkus简介"><span class="nav-number">1.</span> <span class="nav-text">Quarkus简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发环境"><span class="nav-number">2.</span> <span class="nav-text">开发环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建项目"><span class="nav-number">3.</span> <span class="nav-text">创建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行应用程序"><span class="nav-number">4.</span> <span class="nav-text">运行应用程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用注入"><span class="nav-number">5.</span> <span class="nav-text">使用注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展模块"><span class="nav-number">6.</span> <span class="nav-text">扩展模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">7.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打包并运行应用程序"><span class="nav-number">8.</span> <span class="nav-text">打包并运行应用程序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#打包成Native"><span class="nav-number">8.1.</span> <span class="nav-text">打包成Native</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后续"><span class="nav-number">9.</span> <span class="nav-text">后续</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2020 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">乐游</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'ry4r48Li8ylactoROUmqjh7M-gzGzoHsz',
+        appKey: 'vBcOR0V5lfk22hVzx04wUI57',
+        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧！',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
